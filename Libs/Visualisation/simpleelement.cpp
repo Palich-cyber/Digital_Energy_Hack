@@ -63,11 +63,18 @@ void SimpleElement::clearBuffer(){
     return;
 }
 
-void SimpleElement::setMaterialObj(QOpenGLShaderProgram *program, materialDataObj material){
+void SimpleElement::setMaterialObj( materialDataObj materialValue ){
 
-    program->setUniformValue(program->uniformLocation("u_material_property.ambient"), material.ambient);
-    program->setUniformValue(program->uniformLocation("u_material_property.diffuse"), material.diffuse);
-    program->setUniformValue(program->uniformLocation("u_material_property.specular"), material.specular);
+    if (material){
+
+        delete material;
+        material = nullptr;
+    }
+
+    material = new Materials;
+    material->setAmbientColor( materialValue.ambient );
+    material->setSpecularColor( materialValue.specular );
+    material->setDiffuseColor( materialValue.diffuse );
 
     return;
 }
@@ -81,53 +88,55 @@ void SimpleElement::draw(QOpenGLShaderProgram *program, QOpenGLFunctions *functi
 
     glEnable(GL_DEPTH_TEST);
 
-    if (texture){
-        texture->bind();
-        program->setUniformValue("u_texture", 0);
-        program->setUniformValue(program->uniformLocation("u_material_property.ambient"), material->getAmbientColor());
-        program->setUniformValue(program->uniformLocation("u_material_property.diffuse"), material->getDiffuseColor());
-        program->setUniformValue(program->uniformLocation("u_material_property.specular"), material->getSpecularColor());
-        program->setUniformValue("texture_mode", true);
+//    if (texture){
+//        texture->bind();
+//        program->setUniformValue("u_texture", 0);
+//        program->setUniformValue(program->uniformLocation("u_material_property.ambient"), material->getAmbientColor());
+//        program->setUniformValue(program->uniformLocation("u_material_property.diffuse"), material->getDiffuseColor());
+//        program->setUniformValue(program->uniformLocation("u_material_property.specular"), material->getSpecularColor());
+//        program->setUniformValue("texture_mode", true);
+//        program->setUniformValue("model_matrix", modelMatrix);
+//        program->setUniformValue(program->uniformLocation("u_normal_matrix"), normalMatrix);
+
+//        vertexBuffer.bind();
+
+//        int offset = 0;
+
+//        int vert_loc = program->attributeLocation("vertexAttr");
+//        program->enableAttributeArray(vert_loc);
+//        program->setAttributeBuffer(vert_loc, GL_FLOAT, offset, 3, sizeof(vertex_data_Obj));
+
+//        offset += sizeof(QVector3D);
+
+//        int text_loc = program->attributeLocation("textureAttr");
+//        program->enableAttributeArray(text_loc);
+//        program->setAttributeBuffer(text_loc, GL_FLOAT, offset, 2, sizeof(vertex_data_Obj));
+
+//        offset += sizeof(QVector2D);
+
+//        int norm_loc = program->attributeLocation("normalAttr");
+//        program->enableAttributeArray(norm_loc);
+//        program->setAttributeBuffer(norm_loc, GL_FLOAT, offset, 3, sizeof(vertex_data_Obj));
+
+//        indexBuffer.bind();
+//        functions->glDrawElements(GL_TRIANGLES, indexBuffer.size(), GL_UNSIGNED_INT, 0);
+
+//        program->disableAttributeArray(vert_loc);
+//        program->disableAttributeArray(text_loc);
+//        program->disableAttributeArray(norm_loc);
+
+//        texture->release();
+//        vertexBuffer.release();
+//        indexBuffer.release();
+//    }
+
+//    else{
+        program->setUniformValue("texture_mode", true); // false
         program->setUniformValue("model_matrix", modelMatrix);
-        program->setUniformValue(program->uniformLocation("u_normal_matrix"), normalMatrix);
-
-        vertexBuffer.bind();
-
-        int offset = 0;
-
-        int vert_loc = program->attributeLocation("vertexAttr");
-        program->enableAttributeArray(vert_loc);
-        program->setAttributeBuffer(vert_loc, GL_FLOAT, offset, 3, sizeof(vertex_data_Obj));
-
-        offset += sizeof(QVector3D);
-
-        int text_loc = program->attributeLocation("textureAttr");
-        program->enableAttributeArray(text_loc);
-        program->setAttributeBuffer(text_loc, GL_FLOAT, offset, 2, sizeof(vertex_data_Obj));
-
-        offset += sizeof(QVector2D);
-
-        int norm_loc = program->attributeLocation("normalAttr");
-        program->enableAttributeArray(norm_loc);
-        program->setAttributeBuffer(norm_loc, GL_FLOAT, offset, 3, sizeof(vertex_data_Obj));
-
-        indexBuffer.bind();
-        functions->glDrawElements(GL_TRIANGLES, indexBuffer.size(), GL_UNSIGNED_INT, 0);
-
-        program->disableAttributeArray(vert_loc);
-        program->disableAttributeArray(text_loc);
-        program->disableAttributeArray(norm_loc);
-
-        texture->release();
-        vertexBuffer.release();
-        indexBuffer.release();
-    }
-
-    else{
-        program->setUniformValue("texture_mode", true);
-        program->setUniformValue("model_matrix", modelMatrix);
+       // program->setUniformValue("isConstColor", true); // none
         program->setUniformValue("constColor", QColor(Qt::gray));
         program->setUniformValue(program->uniformLocation("u_material_property.ambient"), material->getAmbientColor());
+        qDebug () << "ambience color is "<< material->getAmbientColor();
         program->setUniformValue(program->uniformLocation("u_material_property.diffuse"), material->getDiffuseColor());
         program->setUniformValue(program->uniformLocation("u_material_property.specular"), material->getSpecularColor());
         program->setUniformValue(program->uniformLocation("u_normal_matrix"), normalMatrix);
@@ -161,7 +170,7 @@ void SimpleElement::draw(QOpenGLShaderProgram *program, QOpenGLFunctions *functi
 
         vertexBuffer.release();
         indexBuffer.release();
-    }
+//    }
 
     glDisable(GL_DEPTH_TEST);
 
@@ -186,9 +195,9 @@ void SimpleElement::translate(const QVector3D &translate_value){
     mTranslate = translate_value;
 
     modelMatrix.setToIdentity();
-    modelMatrix.rotate(QQuaternion::fromAxisAndAngle(0.0F, 0.0F, 1.0F, -23.26F));
-    modelMatrix.rotate(QQuaternion::fromAxisAndAngle(1.0F, 0.0F, 0.0F, -90.0F));
-    modelMatrix.rotate(QQuaternion::fromAxisAndAngle(0.0F, 0.0F, 1.0F, 180.0F));
+//    modelMatrix.rotate(QQuaternion::fromAxisAndAngle(0.0F, 0.0F, 1.0F, -23.26F));
+//    modelMatrix.rotate(QQuaternion::fromAxisAndAngle(1.0F, 0.0F, 0.0F, -90.0F));
+//    modelMatrix.rotate(QQuaternion::fromAxisAndAngle(0.0F, 0.0F, 1.0F, 180.0F));
     modelMatrix.translate(mTranslate);
     modelMatrix.rotate(mRotate);
 

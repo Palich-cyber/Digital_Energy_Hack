@@ -31,6 +31,7 @@ public:
     void paintGL();
     void RotateMyObject(float x, float y, float z);
     void setModel ( const QString &pathToModelValue ) noexcept;
+    void setColor ( bool isPredictModeValue );
 
 private:
 
@@ -56,6 +57,7 @@ private:
     QVector2D ptrMousePosition;
 
 protected:
+
     void mousePressEvent(QMouseEvent *pe);
     void mouseMoveEvent(QMouseEvent *pe);
     void wheelEvent(QWheelEvent *pe);

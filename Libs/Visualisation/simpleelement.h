@@ -41,7 +41,7 @@ public:
 
     void init(const QVector<vertex_data_Obj> &vert_data, const QVector<GLuint> &indexes, Materials *materialValue);
     void clearBuffer();
-    void setMaterialObj(QOpenGLShaderProgram *program, materialDataObj material);
+    void setMaterialObj( materialDataObj materialValue );
 
     //From class Transform
     void draw(QOpenGLShaderProgram *program, QOpenGLFunctions *functions);

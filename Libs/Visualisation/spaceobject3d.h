@@ -40,6 +40,8 @@ public:
     void setMaterialObj(QOpenGLShaderProgram *program, materialDataObj material);
     void addSimpleElementFromObjModel(SimpleElement *elementFromObjModel);
     void translateObj(const QVector3D &translateValue);
+    void translateElement( const int &elementNum, const QVector3D &translateValue );
+    void setElementColor ( const int &elementNum, const QVector3D &colorValue );
     void rotateObj(const QQuaternion &rotateValue);
     bool isNull();
     SimpleElement *getSimpleElementFromObjModel(const int &indexValue);

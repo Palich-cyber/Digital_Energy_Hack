@@ -37,7 +37,10 @@ SOURCES += \
     Libs/Visualisation/Scene.cpp \
     Libs/Visualisation/simpleelement.cpp \
     Libs/Visualisation/spaceobject3d.cpp \
-    Libs/DataBase/DataBaseFunction.cpp
+    Libs/DataBase/DataBaseFunction.cpp \
+    TacticLevel.cpp \
+    LoginDialog.cpp \
+    StrtegyInformer.cpp
 
 HEADERS += \
         EnergyOracle.h \
@@ -52,7 +55,16 @@ HEADERS += \
     Libs/Visualisation/transform.h \
     Libs/DataBase/DataBaseConstants.h \
     Libs/DataBase/DataBaseFunction.h \
-    Libs/DataBase/DataBaseStructs.h
+    Libs/DataBase/DataBaseStructs.h \
+    TacticLevel.h \
+    LoginDialog.h \
+    StrtegyInformer.h
 
 FORMS += \
-        EnergyOracle.ui
+    EnergyOracle.ui \
+    TacticLevel.ui \
+    LoginDialog.ui \
+    StrtegyInformer.ui
+
+RESOURCES += \
+    resources.qrc

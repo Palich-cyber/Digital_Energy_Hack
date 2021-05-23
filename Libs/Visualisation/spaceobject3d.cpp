@@ -1,4 +1,5 @@
 #include <QStringList>
+#include <QVector3D>
 #include "spaceobject3d.h"
 
 SpaceObject3D::SpaceObject3D() :
@@ -141,6 +142,32 @@ void SpaceObject3D::translateObj(const QVector3D &translateValue){
     for (int i = 0; i < elementsFromObjModel.size(); ++i){
         elementsFromObjModel[i]->translate(translateValue);
     }
+
+    return;
+}
+
+void SpaceObject3D::translateElement( const int &elementNum, const QVector3D &translateValue ){
+
+    qDebug () << "size " << elementsFromObjModel.size();
+    if ( elementsFromObjModel.size() <= elementNum || elementNum < 0 ) return;
+
+    elementsFromObjModel[elementNum]->translate(translateValue);
+    qDebug () << "translate " << translateValue;
+
+    return;
+}
+
+void SpaceObject3D::setElementColor(const int &elementNum, const QVector3D &colorValue ){
+
+    qDebug () << "size " << elementsFromObjModel.size();
+    if ( elementsFromObjModel.size() <= elementNum || elementNum < 0 ) return;
+
+    materialDataObj material;
+    material.ambient  = colorValue;
+    material.diffuse  = colorValue;
+    material.specular = colorValue;
+    elementsFromObjModel[elementNum]->setMaterialObj( material );
+    qDebug () << "translate ";
 
     return;
 }

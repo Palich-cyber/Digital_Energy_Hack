@@ -9,10 +9,10 @@ Scene::Scene( QWidget *parent ) :
 
     this->setFocusPolicy(Qt::StrongFocus);
 
-    mCamera->translate(QVector3D(0.0F, 0.0F, -10.0F));
+    mCamera->translate(QVector3D(0.0F, 0.0F, -3.5F));
 
-    mLight->setPosition(QVector4D(1.0F, 1.0F, 1.0F, 1.0F));
-    mLight->setDirection(QVector4D(-1.0F, -1.0F, -1.0F, 0.0F));
+    mLight->setPosition(QVector4D(0.0F, 0.0F, -5.0F, 0.0F));
+    mLight->setDirection(QVector4D(0.0F, 0.0F, 1.0F, 0.0F));
     mLight->setCatoff(20.0F/180.0F*M_PI);
 }
 
@@ -42,12 +42,16 @@ void Scene::paintGL(){
     if ( !mProgram.bind() ) return;
 
     mProgram.setUniformValue( mProgram.uniformLocation( "projection_matrix" ), projection_matrix );
-    mProgram.setUniformValue( mProgram.uniformLocation( "u_light_position" ), QVector4D( 0.0, 0.0, 0.0, 1.0 ) );
+    mProgram.setUniformValue( mProgram.uniformLocation( "u_light_position" ), QVector4D( 1.0, 1.0, 1.0, 1.0 ) );
     mProgram.setUniformValue( mProgram.uniformLocation( "u_light_power" ), 2.0F );
 
     mCamera->draw( &mProgram );
 
+//    mSpaceObject->setElementColor( 2, QColor( 255, 0, 0 ) );
+//    mSpaceObject->setElementColor( 3, QColor( 255, 0, 0 ) );
+//    mSpaceObject->setElementColor( 4, QColor( 255, 0, 0 ) );
     mSpaceObject->drawObj( &mProgram, context()->functions() );
+
 
     mProgram.release();
 
@@ -106,8 +110,6 @@ void Scene::mouseMoveEvent(QMouseEvent *pe){
     QVector3D axis = QVector3D( diff.y(), diff.x(), 0.0F );
     mCamera->rotate(QQuaternion::fromAxisAndAngle(axis, angle));
 
-
-
     update();
 }
 
@@ -126,19 +128,25 @@ void Scene::keyPressEvent(QKeyEvent *pe){
     switch ( pe->key() )
     {
      case Qt::Key_Up:
-        mCamera->translate( QVector3D( 0.0F, 10.0F, 0.0F ) );
+//        mCamera->translate( QVector3D( 0.0F, 10.0F, 0.0F ) );
+            mSpaceObject->translateElement( 0, QVector3D( 0.0F, 0.1F, 0.0F ) );
+            //mSpaceObject->translateElement( 1, QVector3D( 0.0F, 0.1F, 0.0F ) );
+            //mSpaceObject->translateElement( 2, QVector3D( 0.0F, 0.1F, 0.0F ) );
+            mSpaceObject->translateElement( 3, QVector3D( 0.0F, 0.1F, 0.0F ) );
+
+            mSpaceObject->translateElement( 4, QVector3D( 0.0F, 0.1F, 0.0F ) );
      break;
 
      case Qt::Key_Down:
-        mCamera->translate( QVector3D( 0.0F, -10.0F, 0.0F ) );
+        //mCamera->translate( QVector3D( 0.0F, -10.0F, 0.0F ) );
      break;
 
      case  Qt::Key_Left:
-        mCamera->translate( QVector3D( 10.0F, 0.0F, 0.0F ) );
+        //mCamera->translate( QVector3D( 10.0F, 0.0F, 0.0F ) );
      break;
 
      case Qt::Key_Right:
-        mCamera->translate( QVector3D( -10.0F, 0.0F, 0.0F ) );
+        //mCamera->translate( QVector3D( -10.0F, 0.0F, 0.0F ) );
      break;
     }
 
@@ -155,6 +163,32 @@ void  Scene::RotateMyObject(float x, float y, float z)
 void Scene::setModel( const QString &pathToModelValue ) noexcept{
 
     pathToModel = pathToModelValue;
+
+    return;
+}
+
+void Scene::setColor( bool isPredictModeValue ){
+
+    if ( !isPredictModeValue ){
+
+        mSpaceObject->setElementColor( 2, QVector3D( 1.0F, 0.0F, 0.0F ) );
+        mSpaceObject->setElementColor( 3, QVector3D( 1.0F, 0.0F, 0.0F ) );
+        mSpaceObject->setElementColor( 4, QVector3D( 1.0F, 0.0F, 0.0F ) );
+        mSpaceObject->setElementColor( 5, QVector3D( 1.0F, 0.66F, 1.0F ) );
+        mSpaceObject->setElementColor( 6, QVector3D( 1.0F, 0.66F, 1.0F ) );
+        mSpaceObject->setElementColor( 9, QVector3D( 1.0F, 1.0F, 0.0F ) );
+        mSpaceObject->setElementColor( 8, QVector3D( 1.0F, 0.66F, 1.0F ) );
+    }
+    else{
+
+        mSpaceObject->setElementColor( 2, QVector3D( 0.0F, 1.0F, 0.0F ) );
+        mSpaceObject->setElementColor( 3, QVector3D( 0.0F, 1.0F, 0.0F ) );
+        mSpaceObject->setElementColor( 4, QVector3D( 0.0F, 1.0F, 0.0F ) );
+        mSpaceObject->setElementColor( 5, QVector3D( 0.0F, 1.0F, 1.0F ) );
+        mSpaceObject->setElementColor( 6, QVector3D( 0.0F, 1.0F, 0.0F ) );
+        mSpaceObject->setElementColor( 9, QVector3D( 0.0F, 1.0F, 0.0F ) );
+        mSpaceObject->setElementColor( 8, QVector3D( 0.0F, 1.0F, 1.0F ) );
+    }
 
     return;
 }

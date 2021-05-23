@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>StrtegyInformer</class>
+ <widget class="QWidget" name="StrtegyInformer">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>544</width>
+    <height>252</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>200</x>
+     <y>10</y>
+     <width>211</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>20</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(255, 0, 0);</string>
+   </property>
+   <property name="text">
+    <string>ВНИМАНИЕ !!!</string>
+   </property>
+  </widget>
+  <widget class="QGroupBox" name="groupBox">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>60</y>
+     <width>521</width>
+     <height>181</height>
+    </rect>
+   </property>
+   <property name="title">
+    <string>СПИСОК КРИТИЧЕСКИХ РЕГИОНОВ</string>
+   </property>
+   <widget class="QTableWidget" name="tableWidget">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>20</y>
+      <width>501</width>
+      <height>151</height>
+     </rect>
+    </property>
+    <row>
+     <property name="text">
+      <string>1</string>
+     </property>
+    </row>
+    <row>
+     <property name="text">
+      <string>2</string>
+     </property>
+    </row>
+    <column>
+     <property name="text">
+      <string>Наименование</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>Степень аварии</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>Критичность</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>Причины</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>Прогнозный интервал</string>
+     </property>
+    </column>
+    <item row="0" column="0">
+     <property name="text">
+      <string>г. Санкт-Петербург и Ленинградская область</string>
+     </property>
+    </item>
+    <item row="0" column="1">
+     <property name="text">
+      <string>ВЫСОКАЯ</string>
+     </property>
+    </item>
+    <item row="0" column="2">
+     <property name="text">
+      <string>ВЫСОКАЯ</string>
+     </property>
+    </item>
+    <item row="0" column="3">
+     <property name="text">
+      <string>Сильный ветер</string>
+     </property>
+    </item>
+    <item row="0" column="4">
+     <property name="text">
+      <string>20:00 - 01:00 23.05.2021 </string>
+     </property>
+    </item>
+    <item row="1" column="0">
+     <property name="text">
+      <string>г. Псков и Псковкая область</string>
+     </property>
+    </item>
+    <item row="1" column="1">
+     <property name="text">
+      <string>ВЫШЕ СРЕДНЕГО</string>
+     </property>
+    </item>
+    <item row="1" column="2">
+     <property name="text">
+      <string>ВЫШЕ СРЕДНЕГО</string>
+     </property>
+    </item>
+    <item row="1" column="3">
+     <property name="text">
+      <string>Сильный ветер</string>
+     </property>
+    </item>
+    <item row="1" column="4">
+     <property name="text">
+      <string>21:00 - 01:00 23.05.2021 </string>
+     </property>
+    </item>
+   </widget>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

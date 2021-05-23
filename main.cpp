@@ -1,10 +1,10 @@
-#include "EnergyOracle.h"
+#include "LoginDialog.h"
 #include <QApplication>
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    EnergyOracle w;
+    LoginDialog w;
     w.show();
 
     return a.exec();

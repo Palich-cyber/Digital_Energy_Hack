@@ -10,7 +10,9 @@ class QString;
 
     // ------------------------- COMMON -------------------------
     void removeConnection( QSqlDatabase &&dataBaseValue ) noexcept;
-    bool creatConnection(QSqlDatabase &&dataBaseValue, ValueConnectionDBStruct *dataBaseNameValue , const dataBaseType &dataBaseTypeValue) noexcept;
+    bool creatConnection( QSqlDatabase &&dataBaseValue, connectionStruct *connectionPointer ) noexcept;
+    bool isAutonomMode ( QSqlDatabase &&dataBaseValue ) noexcept;
+    void clearTable ( const QString &tableNameValue ) noexcept;
     // ----------------------- END COMMON -----------------------
 
 #endif // DATABASEFUNCTION_H

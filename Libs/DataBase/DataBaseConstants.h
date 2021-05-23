@@ -8,6 +8,17 @@
  * scenario             - scenarioTable
  * scenarioStation      - scenarioStationTable
 */
+
+const QString DEFAULT_DATABASE_NAME  = "Resources/dataBase/DB_Energy.db";
+const QString SQLITE_DRIVER_NAME     = "QSQLITE";
+const QString POSTRESQL_DRIVER_NAME  = "QPSQL";
+
+const QStringList DEFAULT_CONNECTION = { "10.90.90.23",          // host     - 0
+                                         "5432",                 // port     - 1
+                                         "postgres",             // user     - 2
+                                         "xTk9Rs56",             // password - 3
+                                         "october_mission" };    // name`    - 4
+
 const QStringList tableHeaders    = { "space_obj",
                                       "scenarioSpaceObject",
                                       "scenario",
